@@ -1,0 +1,4 @@
+{
+  "tests/test_command_handler_disabled.py::test_no_shell_markers_in_source": true,
+  "tests/test_parser.py::TestMatchCommand::test_arg_value_case_preserved": true
+}

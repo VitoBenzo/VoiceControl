@@ -1,0 +1,5 @@
+*.log
+voicecontrol.log
+venv/
+__pycache__/
+.env

@@ -22,14 +22,12 @@ _logger = logging.getLogger(__name__)
 
 
 def _path_inside(path: Path, base: Path) -> bool:
-    """Регистронезависимая проверка «path находится внутри base» без ложных
-    префиксов (C:\\Data не считается директорией для C:\\Database)."""
-    p_cf = str(path).casefold()
-    base_cf = str(base).casefold()
-    if p_cf == base_cf:
-        return True
-    separator = '\\' if '\\' in base_cf else '/'
-    return p_cf.startswith(base_cf.rstrip('\\/') + separator)
+    """Check if *path* is inside *base* without false positives.
+
+    Both paths are resolved before this function is called, so pathlib handles
+    platform-specific separators and path comparisons.
+    """
+    return path.is_relative_to(base)
 
 
 # ------------------------------------------------------------------ валидаторы

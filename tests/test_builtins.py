@@ -37,6 +37,14 @@ class TestPathValidator:
         p.mkdir()
         assert check(str(p)) is None
 
+    def test_inside_allowed_with_mixed_separators(self, tmp_path):
+        allowed_dir = tmp_path / 'allowed'
+        allowed_dir.mkdir()
+        target = allowed_dir / 'sub'
+        target.mkdir()
+        check = make_path_validator([str(allowed_dir)])
+        assert check(str(target).replace('\\', '/')) is None
+
     def test_outside_allowed(self, tmp_path):
         allowed_dir = tmp_path / 'allowed'
         allowed_dir.mkdir()
